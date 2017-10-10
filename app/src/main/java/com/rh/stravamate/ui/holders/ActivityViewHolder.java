@@ -12,8 +12,10 @@ import com.rh.stravamate.R;
 
 public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public TextView date;
+    public TextView name;
     public ActivityViewHolder(View itemView) {
         super(itemView);
         date = itemView.findViewById(R.id.date);
+        name = itemView.findViewById(R.id.name);
     }
 }

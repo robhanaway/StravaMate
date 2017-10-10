@@ -34,6 +34,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
     public void onBindViewHolder(ActivityViewHolder holder, int position) {
         Activity activity = activityList.get(position);
         holder.date.setText(activity.getStartDateLocal().toString());
+        holder.name.setText(activity.getName());
 
     }
 
