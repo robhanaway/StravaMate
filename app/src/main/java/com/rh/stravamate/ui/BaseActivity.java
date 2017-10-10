@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.rh.stravamate.StravaMateApplication;
 import com.rh.stravamate.model.util.AppComponent;
 import com.rh.stravamate.model.util.Logging;
+import com.rh.stravamate.model.util.config.Settings;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,10 @@ import javax.inject.Inject;
 public abstract class BaseActivity extends AppCompatActivity {
     @Inject
     Logging logging;
+
+    @Inject
+    Settings settings;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((StravaMateApplication)getApplication()).getAppComponent().inject(this);
