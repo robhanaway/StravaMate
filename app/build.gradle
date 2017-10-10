@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:recyclerview-v7:+'
     compile "com.google.dagger:dagger-android:${daggerVersion}"
     compile "com.google.dagger:dagger-android-support:${daggerVersion}"
     // if you use the support libraries
@@ -30,6 +31,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    compile 'android.arch.persistence.room:runtime:1.0.0-alpha9-1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha9-1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'

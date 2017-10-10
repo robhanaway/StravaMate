@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 @Singleton
 public class Settings {
     final static String PREFS = "preferences";
-    final static String CODE_KEY = "CODE";
+    final static String CODE_KEY = "code";
     final static String CODE_TOKEN = "token";
     final Context context;
 
@@ -42,6 +42,7 @@ public class Settings {
     void save() {
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit();
         editor.putString(CODE_KEY, code);
+        editor.putString(CODE_TOKEN, token);
         editor.apply();
     }
 
