@@ -10,7 +10,7 @@ import com.rh.stravamate.model.datalayer.primitives.Athlete;
 /**
  * Created by robert.hanaway on 10/10/2017.
  */
-@Database(entities = {Athlete.class, Activity.class}, version = 3)
+@Database(entities = {Athlete.class, Activity.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class AbstractStravaDB extends RoomDatabase{
     public abstract DB db();

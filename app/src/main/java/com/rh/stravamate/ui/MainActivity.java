@@ -52,6 +52,8 @@ public class MainActivity extends BaseActivity implements
                 logging.d(getTag(), "Token received %s", authResponse.getToken());
                 settings.setToken(response.body().getToken());
                 stravaDb.storeMe(authResponse.getAthlete());
+                removeAuthAndLoadList();
+
             }
 
             @Override
@@ -88,8 +90,17 @@ public class MainActivity extends BaseActivity implements
         fragmentTransaction.add(R.id.frame, fragment).commit();
     }
 
+    void removeAuthAndLoadList() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-
+                Fragment fragment = ActivityFragment.newInstance();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment).commit();
+            }
+        });
+    }
 
     void loadListFragment() {
         Fragment fragment = ActivityFragment.newInstance();

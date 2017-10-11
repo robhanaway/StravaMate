@@ -2,6 +2,7 @@ package com.rh.stravamate.ui.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rh.stravamate.R;
@@ -13,9 +14,11 @@ import com.rh.stravamate.R;
 public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public TextView date;
     public TextView name;
+    public ImageView type;
     public ActivityViewHolder(View itemView) {
         super(itemView);
         date = itemView.findViewById(R.id.date);
         name = itemView.findViewById(R.id.name);
+        type = itemView.findViewById(R.id.type);
     }
 }
