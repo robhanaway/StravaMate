@@ -3,6 +3,9 @@ package com.rh.stravamate.model.datalayer;
 import android.os.AsyncTask;
 
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.tasks.GetActivities;
+import com.rh.stravamate.model.datalayer.tasks.GetActivitiesFromDb;
+import com.rh.stravamate.model.datalayer.tasks.RefreshActivities;
 import com.rh.stravamate.model.util.Logging;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
 import com.rh.stravamate.model.config.Settings;
@@ -45,42 +48,22 @@ public class DataLayer {
 
     }
 
-    public void refreshActivities(final ActivitiesCallback callback) {
-        new AsyncTask<Void, Void, List<Activity>>() {
+
+    public void loadActivities(final GetActivities.Callback callback) {
+        new GetActivitiesFromDb(logging, stravaDb, retroStrava, settings, new GetActivities.Callback() {
             @Override
-            protected List<Activity> doInBackground(Void... voids) {
-                stravaDb.getDb().deleteAllActivites();
-                ActivityService activityService = retroStrava.getActivityService();
-                loadByPage(activityService, 1);
-                return stravaDb.getDb().getActivities();
-            }
-            protected void onPostExecute(List<Activity> result) {
-                callback.onSuccess(result);
-            }
-        }.execute();
-    }
-
-
-
-    void loadByPage(final ActivityService activityService, final int page) {
-        int thisPage = page;
-        boolean stop = false;
-        while (!stop) {
-
-            try {
-                Call<List<Activity>> response = activityService.get("Bearer " + settings.getToken(), thisPage);
-                Response<List<Activity>> result = response.execute();
-                if (result.code() == 200 && !result.body().isEmpty()) {
-                    stop = false;
-                    stravaDb.getDb().insertActivities(result.body());
-                    thisPage++;
+            public void onSuccess(List<Activity> activities) {
+                if (!activities.isEmpty()) {
+                    callback.onSuccess(activities);
                 } else {
-                    stop = true;
+                    new RefreshActivities(logging, stravaDb, retroStrava, settings, this).execute();
                 }
-            } catch (IOException e) {
-                stop = true;
             }
-        }
 
+            @Override
+            public void onError(Exception e) {
+                callback.onError(e);
+            }
+        }).execute();
     }
 }

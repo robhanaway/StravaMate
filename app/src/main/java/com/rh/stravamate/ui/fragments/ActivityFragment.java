@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.R;
+import com.rh.stravamate.model.datalayer.tasks.GetActivities;
 import com.rh.stravamate.ui.adapters.ActivityAdapter;
 
 import java.util.List;
@@ -67,10 +68,15 @@ public class ActivityFragment extends BaseFragment {
 
 
     void load() {
-        dataLayer.refreshActivities(new DataLayer.ActivitiesCallback() {
+        dataLayer.loadActivities(new GetActivities.Callback() {
             @Override
             public void onSuccess(List<Activity> activities) {
                 listView.setAdapter(new ActivityAdapter(activities, getActivity()));
+            }
+
+            @Override
+            public void onError(Exception e) {
+
             }
         });
     }
