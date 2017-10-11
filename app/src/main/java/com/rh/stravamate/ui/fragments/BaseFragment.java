@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 import com.rh.stravamate.StravaMateApplication;
+import com.rh.stravamate.model.config.Settings;
 import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.util.Logging;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
@@ -24,6 +25,9 @@ public abstract class BaseFragment extends Fragment {
 
     @Inject
     DataLayer dataLayer;
+
+    @Inject
+    Settings settings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

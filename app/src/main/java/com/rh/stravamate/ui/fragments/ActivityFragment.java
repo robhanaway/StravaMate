@@ -71,7 +71,7 @@ public class ActivityFragment extends BaseFragment {
         dataLayer.loadActivities(new GetActivities.Callback() {
             @Override
             public void onSuccess(List<Activity> activities) {
-                listView.setAdapter(new ActivityAdapter(activities, getActivity()));
+                listView.setAdapter(new ActivityAdapter(activities, settings, getActivity()));
             }
 
             @Override

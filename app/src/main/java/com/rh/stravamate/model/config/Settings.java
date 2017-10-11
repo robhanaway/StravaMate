@@ -14,10 +14,12 @@ public class Settings {
     final static String PREFS = "preferences";
     final static String CODE_KEY = "code";
     final static String CODE_TOKEN = "token";
+    final static String CODE_KILOMETRES = "kilometres";
     final Context context;
 
     private String code;
     private String token;
+    private boolean kilometres;
     @Inject
     public Settings(Context context) {
         this.context = context;
@@ -37,12 +39,14 @@ public class Settings {
         SharedPreferences preferences = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         code = preferences.getString(CODE_KEY, null);
         token = preferences.getString(CODE_TOKEN, null);
+        kilometres = preferences.getBoolean(CODE_KILOMETRES, true);
     }
 
     void save() {
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit();
         editor.putString(CODE_KEY, code);
         editor.putString(CODE_TOKEN, token);
+        editor.putBoolean(CODE_KILOMETRES, kilometres);
         editor.apply();
     }
 
@@ -52,6 +56,16 @@ public class Settings {
 
     public void setToken(String token) {
         this.token = token;
+        save();
+    }
+
+
+    public boolean isKilometres() {
+        return kilometres;
+    }
+
+    public void setKilometres(boolean kilometres) {
+        this.kilometres = kilometres;
         save();
     }
 }

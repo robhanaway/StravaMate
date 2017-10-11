@@ -25,6 +25,13 @@
 
         android:layout_below="@+id/name"
     />
+    <TextView
+        android:id="@+id/avg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/date"
+        />
 
     <ImageView
         android:id="@+id/type"

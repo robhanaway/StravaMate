@@ -7,11 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rh.stravamate.R;
+import com.rh.stravamate.model.config.Settings;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.model.util.Constants;
+import com.rh.stravamate.model.util.Converter;
 import com.rh.stravamate.ui.holders.ActivityViewHolder;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -24,11 +30,11 @@ import java.util.TimeZone;
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
     final List<Activity> activityList;
     LayoutInflater layoutInflater;
-    SimpleDateFormat format = new SimpleDateFormat("E d MMM HH:mm", Locale.getDefault());
-    public ActivityAdapter(List<Activity> activityList, Context context) {
+    final Converter converter;
+    public ActivityAdapter(List<Activity> activityList, Settings settings,  Context context) {
         this.activityList = activityList;
         layoutInflater = LayoutInflater.from(context);
-        format.setTimeZone(TimeZone.getDefault());
+        converter = new Converter(settings, context);
     }
 
     @Override
@@ -40,14 +46,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
     @Override
     public void onBindViewHolder(ActivityViewHolder holder, int position) {
         Activity activity = activityList.get(position);
-        holder.date.setText(getDateAndTime(activity.getStartDateLocal()));
+        holder.date.setText(converter.fromDate(activity.getStartDateLocal()));
         holder.name.setText(activity.getName());
+        holder.avgSpeed.setText(converter.getSpeed(activity));
         setType(holder, activity.getType());
     }
 
-    String getDateAndTime(Date date) {
-        return format.format(date);
-    }
+
 
     void setType(ActivityViewHolder holder, String type) {
         if (Constants.TYPE_RUN.equalsIgnoreCase(type)) {

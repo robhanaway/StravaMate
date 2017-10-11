@@ -11,4 +11,7 @@ public interface Constants {
 
     String TYPE_RUN = "Run";
     String TYPE_RIDE = "Ride";
+
+    float METRES_IN_KM = 1000f;
+    float METRES_IN_MILE = 1609.34f;
 }

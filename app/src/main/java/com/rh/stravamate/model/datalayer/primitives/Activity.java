@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.rh.stravamate.model.util.Constants;
 
 import java.util.Date;
 
@@ -188,9 +189,17 @@ public class Activity {
     }
 
     public int getAverageSpeedPerKm() {
+        return getAverageSpeedPerUnit(Constants.METRES_IN_KM);
+    }
+
+    public int getAverageSpeedPerMile() {
+        return getAverageSpeedPerUnit(Constants.METRES_IN_MILE);
+    }
+
+    public int getAverageSpeedPerUnit(float unit) {
         int result = 0;
         if (averageSpeed != 0) {
-            result = (int)(1000f/averageSpeed);
+            result = (int)(unit/averageSpeed);
         }
         return result;
     }
