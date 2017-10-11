@@ -15,12 +15,12 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public TextView date;
     public TextView name;
     public ImageView type;
-    public TextView avgSpeed;
+    public TextView speedAndDistance;
     public ActivityViewHolder(View itemView) {
         super(itemView);
         date = itemView.findViewById(R.id.date);
         name = itemView.findViewById(R.id.name);
         type = itemView.findViewById(R.id.type);
-        avgSpeed = itemView.findViewById(R.id.avg);
+        speedAndDistance = itemView.findViewById(R.id.speed_distance);
     }
 }
