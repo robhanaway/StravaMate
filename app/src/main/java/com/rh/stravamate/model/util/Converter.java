@@ -1,6 +1,7 @@
 package com.rh.stravamate.model.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.rh.stravamate.R;
 import com.rh.stravamate.model.config.Settings;
@@ -27,6 +28,13 @@ public class Converter {
     }
 
     public String fromDate(Date date) {
+        return format.format(date);
+    }
+
+    public String fromDate(Date date, String locale) {
+        if (!TextUtils.isEmpty(locale)) {
+            format.setTimeZone(TimeZone.getTimeZone(locale));
+        }
         return format.format(date);
     }
 

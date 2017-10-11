@@ -83,6 +83,11 @@ public class Activity {
     @Expose
     private float maxSpeed;
 
+    @SerializedName("timezone")
+    @ColumnInfo(name = "timezone")
+    @Expose
+    private String timeZone;
+
     public String getId() {
         return id;
     }
@@ -202,5 +207,13 @@ public class Activity {
             result = (int)(unit/averageSpeed);
         }
         return result;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }
