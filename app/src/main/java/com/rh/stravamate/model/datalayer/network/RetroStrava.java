@@ -1,4 +1,4 @@
-package com.rh.stravamate.model.util.network;
+package com.rh.stravamate.model.datalayer.network;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

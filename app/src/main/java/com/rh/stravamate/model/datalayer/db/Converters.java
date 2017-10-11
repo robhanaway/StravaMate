@@ -1,4 +1,4 @@
-package com.rh.stravamate.model.util;
+package com.rh.stravamate.model.datalayer.db;
 
 import android.arch.persistence.room.TypeConverter;
 

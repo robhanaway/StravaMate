@@ -1,4 +1,4 @@
-package com.rh.stravamate.model.util.config;
+package com.rh.stravamate.model.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.rh.stravamate.StravaMateApplication;
-import com.rh.stravamate.model.util.AppComponent;
 import com.rh.stravamate.model.util.Logging;
-import com.rh.stravamate.model.util.StravaDb;
-import com.rh.stravamate.model.util.config.Settings;
-import com.rh.stravamate.model.util.network.RetroStrava;
+import com.rh.stravamate.model.datalayer.db.StravaDb;
+import com.rh.stravamate.model.config.Settings;
+import com.rh.stravamate.model.datalayer.network.RetroStrava;
 
 import javax.inject.Inject;
 

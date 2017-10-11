@@ -1,8 +1,8 @@
-package com.rh.stravamate.model.util.network;
+package com.rh.stravamate.model.datalayer.network;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rh.stravamate.model.primitives.Athlete;
+import com.rh.stravamate.model.datalayer.primitives.Athlete;
 
 /**
  * Created by robert.hanaway on 10/10/2017.

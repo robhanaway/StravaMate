@@ -2,17 +2,15 @@ package com.rh.stravamate.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.rh.stravamate.model.DataLayer;
-import com.rh.stravamate.model.primitives.Activity;
+import com.rh.stravamate.model.datalayer.DataLayer;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.R;
 import com.rh.stravamate.ui.adapters.ActivityAdapter;
 

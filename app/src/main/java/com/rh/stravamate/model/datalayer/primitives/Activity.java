@@ -1,4 +1,4 @@
-package com.rh.stravamate.model.primitives;
+package com.rh.stravamate.model.datalayer.primitives;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

@@ -1,13 +1,13 @@
-package com.rh.stravamate.model;
+package com.rh.stravamate.model.datalayer;
 
 import android.os.AsyncTask;
 
-import com.rh.stravamate.model.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.model.util.Logging;
-import com.rh.stravamate.model.util.StravaDb;
-import com.rh.stravamate.model.util.config.Settings;
-import com.rh.stravamate.model.util.network.ActivityService;
-import com.rh.stravamate.model.util.network.RetroStrava;
+import com.rh.stravamate.model.datalayer.db.StravaDb;
+import com.rh.stravamate.model.config.Settings;
+import com.rh.stravamate.model.datalayer.network.ActivityService;
+import com.rh.stravamate.model.datalayer.network.RetroStrava;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**

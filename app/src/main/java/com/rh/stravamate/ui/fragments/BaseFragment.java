@@ -5,9 +5,9 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 import com.rh.stravamate.StravaMateApplication;
-import com.rh.stravamate.model.DataLayer;
+import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.util.Logging;
-import com.rh.stravamate.model.util.StravaDb;
+import com.rh.stravamate.model.datalayer.db.StravaDb;
 
 import javax.inject.Inject;
 

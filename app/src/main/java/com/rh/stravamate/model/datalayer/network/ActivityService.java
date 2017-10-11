@@ -1,15 +1,13 @@
-package com.rh.stravamate.model.util.network;
+package com.rh.stravamate.model.datalayer.network;
 
 
-import com.rh.stravamate.model.primitives.Activity;
-import com.rh.stravamate.model.util.StravaDb;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**

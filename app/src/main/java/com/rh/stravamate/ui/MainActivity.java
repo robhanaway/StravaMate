@@ -7,23 +7,17 @@ import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import android.text.TextUtils;
-
 
 import com.rh.stravamate.R;
 
 
-import com.rh.stravamate.model.primitives.Activity;
-import com.rh.stravamate.model.primitives.Athlete;
-import com.rh.stravamate.model.util.network.ActivityService;
-import com.rh.stravamate.model.util.network.AuthResponse;
-import com.rh.stravamate.model.util.network.AuthService;
-import com.rh.stravamate.model.util.network.RetroStrava;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.Athlete;
+import com.rh.stravamate.model.datalayer.network.AuthResponse;
+import com.rh.stravamate.model.datalayer.network.AuthService;
 import com.rh.stravamate.model.util.Constants;
 import com.rh.stravamate.ui.fragments.ActivityFragment;
 import com.rh.stravamate.ui.fragments.AuthFragment;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

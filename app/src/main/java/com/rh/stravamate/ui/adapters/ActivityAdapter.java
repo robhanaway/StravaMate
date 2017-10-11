@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rh.stravamate.R;
-import com.rh.stravamate.model.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.ui.holders.ActivityViewHolder;
 
 import java.util.List;

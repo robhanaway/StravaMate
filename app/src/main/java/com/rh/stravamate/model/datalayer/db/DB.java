@@ -1,11 +1,11 @@
-package com.rh.stravamate.model.util;
+package com.rh.stravamate.model.datalayer.db;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.rh.stravamate.model.primitives.Activity;
-import com.rh.stravamate.model.primitives.Athlete;
+import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.Athlete;
 
 import java.util.List;
 
