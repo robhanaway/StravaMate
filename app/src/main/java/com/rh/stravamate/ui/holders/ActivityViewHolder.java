@@ -23,6 +23,7 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public TextView commentCount;
     public View heartContainer;
     public TextView avgHeart;
+    public TextView maxHeart;
     public ActivityViewHolder(View itemView) {
         super(itemView);
         date = itemView.findViewById(R.id.date);
@@ -36,5 +37,6 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
         commentCount = itemView.findViewById(R.id.comment_count);
         heartContainer = itemView.findViewById(R.id.heart_container);
         avgHeart = itemView.findViewById(R.id.heart_rate);
+        maxHeart = itemView.findViewById(R.id.max_rate);
     }
 }

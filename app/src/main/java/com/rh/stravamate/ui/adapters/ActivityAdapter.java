@@ -64,7 +64,10 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
     void populateHeart(ActivityViewHolder holder, Activity activity) {
         holder.heartContainer.setVisibility(activity.isHasHeartRate() ? View.VISIBLE : View.GONE);
         if (activity.isHasHeartRate()) {
-            holder.avgHeart.setText(String.format(Locale.getDefault(), "%d", (int)activity.getAverageHeartrate()));
+            holder.avgHeart.setText(String.format(Locale.getDefault(), "Avg : %d",
+                    (int)activity.getAverageHeartrate()));
+            holder.maxHeart.setText(String.format(Locale.getDefault(), "Max : %d",
+                    (int)activity.getMaxHeartRate()));
         }
     }
 
