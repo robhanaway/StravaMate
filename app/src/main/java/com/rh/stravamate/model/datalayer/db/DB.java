@@ -29,4 +29,8 @@ public interface DB {
 
     @Query("SELECT * FROM activity")
     List<Activity> getActivities();
+
+
+    @Query("SELECT * FROM activity ORDER by average_speed DESC LIMIT 1")
+    List<Activity> getFastestActivity();
 }

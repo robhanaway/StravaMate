@@ -19,7 +19,7 @@ import java.util.TimeZone;
 public class Converter {
     final Settings settings;
     final Context context;
-    SimpleDateFormat format = new SimpleDateFormat("E d MMM HH:mm", Locale.getDefault());
+    SimpleDateFormat format = new SimpleDateFormat("E d MMM YYYY HH:mm", Locale.getDefault());
 
     public Converter(Settings settings, Context context) {
         this.settings = settings;
@@ -42,13 +42,13 @@ public class Converter {
         String result = "";
         int duration = settings.isKilometres() ? activity.getAverageSpeedPerKm() : activity.getAverageSpeedPerMile();
         float distance = activity.getDistance() / (settings.isKilometres() ? Constants.METRES_IN_KM : Constants.METRES_IN_MILE);
-        result = String.format(Locale.getDefault(), "%.2f%s", distance,
+        result = String.format(Locale.getDefault(), "%.2f %s", distance,
                 context.getResources().getString(settings.isKilometres() ? R.string.km : R.string.mile));
         if (duration > 0) {
             int minutes = duration % 60;
             int hours = duration/60;
             result = result + String.format(Locale.getDefault(),
-                    " %2d:%02d%s",
+                    " %2d:%02d/%s",
                     hours, minutes,
                     context.getResources().getString(settings.isKilometres() ? R.string.km : R.string.mile));
         }

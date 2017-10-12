@@ -42,9 +42,22 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
         holder.name.setText(activity.getName());
         holder.speedAndDistance.setText(converter.getSpeed(activity));
         setType(holder, activity.getType());
+        populateKudosComment(holder, activity);
     }
 
-
+    void populateKudosComment(ActivityViewHolder holder, Activity activity) {
+        int kudos = activity.getKudosCount();
+        int comment = activity.getCommentCount();
+        holder.kudosCommentContainer.setVisibility(kudos + comment > 0 ? View.VISIBLE : View.GONE);
+        holder.kudosView.setVisibility(kudos > 0 ? View.VISIBLE : View.GONE);
+        if (kudos > 0) {
+            holder.kudosCount.setText(String.valueOf(kudos));
+        }
+        holder.commentView.setVisibility(comment > 0 ? View.VISIBLE : View.GONE);
+        if (comment > 0) {
+            holder.commentCount.setText(String.valueOf(comment));
+        }
+    }
 
     void setType(ActivityViewHolder holder, String type) {
         if (Constants.TYPE_RUN.equalsIgnoreCase(type)) {

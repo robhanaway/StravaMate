@@ -22,6 +22,7 @@ public abstract class GetActivities extends BaseTask<Void, Void, List<Activity>>
 
     final Callback callback;
 
+
     public GetActivities(Logging logging, StravaDb stravaDb, RetroStrava retroStrava, Settings settings, Callback callback) {
         super(logging, stravaDb, retroStrava, settings);
         this.callback = callback;

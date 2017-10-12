@@ -49,6 +49,7 @@ public class DataLayer {
     }
 
 
+
     public void loadActivities(final GetActivities.Callback callback) {
         new GetActivitiesFromDb(logging, stravaDb, retroStrava, settings, new GetActivities.Callback() {
             @Override

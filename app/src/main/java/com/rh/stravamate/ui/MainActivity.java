@@ -4,12 +4,17 @@ package com.rh.stravamate.ui;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 import com.rh.stravamate.R;
@@ -22,6 +27,7 @@ import com.rh.stravamate.model.datalayer.network.AuthService;
 import com.rh.stravamate.model.util.Constants;
 import com.rh.stravamate.ui.fragments.ActivityFragment;
 import com.rh.stravamate.ui.fragments.AuthFragment;
+import com.rh.stravamate.ui.fragments.StatsFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +37,13 @@ public class MainActivity extends BaseActivity implements
         AuthFragment.OnFragmentInteractionListener,
         ActivityFragment.OnListFragmentInteractionListener{
 
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -38,7 +51,14 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        createActionBar();
+        logging.d(getTag(), "onCreate");
+
+        loadMe();
+    }
+
+    void createActionBar() {
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
@@ -50,26 +70,56 @@ public class MainActivity extends BaseActivity implements
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("");
+                getSupportActionBar().setTitle(R.string.app_name);
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("");
+                getSupportActionBar().setTitle(R.string.app_name);
             }
         };
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.actionbar_drawer);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.actionbar_drawer);
 
-        logging.d(getTag(), "onCreate");
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        loadMe();
+        ListView listView = findViewById(R.id.left_drawer);
+        listView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.main_menu)));
+
+        listView.setOnItemClickListener(new DrawerItemClickListener());
+    }
+
+    void selectItem(int position) {
+        switch (position) {
+            case 1:
+                showStats();
+                break;
+        }
+        mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    void showStats() {
+        Fragment fragment = StatsFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment).commit();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                } else {
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                }
+                break;
+        }
+        return true;
     }
 
     @Override

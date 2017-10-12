@@ -1,7 +1,5 @@
 package com.rh.stravamate.model.datalayer.tasks;
 
-import android.text.TextUtils;
-
 import com.rh.stravamate.model.config.Settings;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
 import com.rh.stravamate.model.datalayer.network.RetroStrava;
@@ -10,25 +8,22 @@ import com.rh.stravamate.model.util.Logging;
 
 import java.util.List;
 
-
-
 /**
  * Created by robert.hanaway on 11/10/2017.
  */
 
-public class GetActivitiesFromDb extends GetActivities {
-    public GetActivitiesFromDb(Logging logging, StravaDb stravaDb, RetroStrava retroStrava,
-                               Settings settings, Callback callback) {
+public class GetFastestActivity extends GetActivities {
+    public GetFastestActivity(Logging logging, StravaDb stravaDb, RetroStrava retroStrava, Settings settings, Callback callback) {
         super(logging, stravaDb, retroStrava, settings, callback);
     }
 
     @Override
-    protected List<Activity> getActivities() {
-        return getActivitiesFromDb();
+    public String getTag() {
+        return GetFastestActivity.class.getSimpleName();
     }
 
     @Override
-    public String getTag() {
-        return GetActivitiesFromDb.class.getSimpleName();
+    protected List<Activity> getActivities() {
+        return stravaDb.getDb().getFastestActivity();
     }
 }

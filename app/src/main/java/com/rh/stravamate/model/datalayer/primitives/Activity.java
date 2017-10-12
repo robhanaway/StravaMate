@@ -26,8 +26,6 @@ public class Activity {
     @Expose
     private String name;
 
-
-
     @SerializedName("start_date_local")
     @ColumnInfo(name = "start_date_local")
     @Expose
@@ -87,6 +85,57 @@ public class Activity {
     @ColumnInfo(name = "timezone")
     @Expose
     private String timeZone;
+
+    @SerializedName("average_heartrate")
+    @ColumnInfo(name = "average_heartrate")
+    @Expose
+    private float averageHeartrate;
+
+    @SerializedName("max_heartrate")
+    @ColumnInfo(name = "max_heartrate")
+    @Expose
+    private float maxHeartRate;
+
+    @SerializedName("has_heartrate")
+    @ColumnInfo(name = "has_heartrate")
+    @Expose
+    private boolean hasHeartRate;
+
+
+    @SerializedName("achievement_count")
+    @ColumnInfo(name = "achievement_count")
+    @Expose
+    private int achievementCount;
+
+    @SerializedName("pr_count")
+    @ColumnInfo(name = "pr_count")
+    @Expose
+    private int prCount;
+
+    @SerializedName("kudos_count")
+    @ColumnInfo(name = "kudos_count")
+    @Expose
+    private int kudosCount;
+
+    @SerializedName("comment_count")
+    @ColumnInfo(name = "comment_count")
+    @Expose
+    private int commentCount;
+
+    @SerializedName("photo_count")
+    @ColumnInfo(name = "photo_count")
+    @Expose
+    private int photoCount;
+
+    @SerializedName("total_photo_count")
+    @ColumnInfo(name = "total_photo_count")
+    @Expose
+    private int totalPhotoCount;
+
+    @SerializedName("manual")
+    @ColumnInfo(name = "manual")
+    @Expose
+    private boolean manual;
 
     public String getId() {
         return id;
@@ -215,5 +264,85 @@ public class Activity {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public float getAverageHeartrate() {
+        return averageHeartrate;
+    }
+
+    public void setAverageHeartrate(float averageHeartrate) {
+        this.averageHeartrate = averageHeartrate;
+    }
+
+    public float getMaxHeartRate() {
+        return maxHeartRate;
+    }
+
+    public void setMaxHeartRate(float maxHeartRate) {
+        this.maxHeartRate = maxHeartRate;
+    }
+
+    public boolean isHasHeartRate() {
+        return hasHeartRate;
+    }
+
+    public void setHasHeartRate(boolean hasHeartRate) {
+        this.hasHeartRate = hasHeartRate;
+    }
+
+    public int getAchievementCount() {
+        return achievementCount;
+    }
+
+    public void setAchievementCount(int achievementCount) {
+        this.achievementCount = achievementCount;
+    }
+
+    public int getPrCount() {
+        return prCount;
+    }
+
+    public void setPrCount(int prCount) {
+        this.prCount = prCount;
+    }
+
+    public int getKudosCount() {
+        return kudosCount;
+    }
+
+    public void setKudosCount(int kudosCount) {
+        this.kudosCount = kudosCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public int getPhotoCount() {
+        return photoCount;
+    }
+
+    public void setPhotoCount(int photoCount) {
+        this.photoCount = photoCount;
+    }
+
+    public int getTotalPhotoCount() {
+        return totalPhotoCount;
+    }
+
+    public void setTotalPhotoCount(int totalPhotoCount) {
+        this.totalPhotoCount = totalPhotoCount;
+    }
+
+    public boolean isManual() {
+        return manual;
+    }
+
+    public void setManual(boolean manual) {
+        this.manual = manual;
     }
 }
