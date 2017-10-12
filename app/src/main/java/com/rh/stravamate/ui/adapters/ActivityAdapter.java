@@ -14,6 +14,7 @@ import com.rh.stravamate.model.util.Converter;
 import com.rh.stravamate.ui.holders.ActivityViewHolder;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by robert.hanaway on 10/10/2017.
@@ -42,6 +43,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
         holder.name.setText(activity.getName());
         holder.speedAndDistance.setText(converter.getSpeed(activity));
         setType(holder, activity.getType());
+        populateHeart(holder, activity);
         populateKudosComment(holder, activity);
     }
 
@@ -56,6 +58,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
         holder.commentView.setVisibility(comment > 0 ? View.VISIBLE : View.GONE);
         if (comment > 0) {
             holder.commentCount.setText(String.valueOf(comment));
+        }
+    }
+
+    void populateHeart(ActivityViewHolder holder, Activity activity) {
+        holder.heartContainer.setVisibility(activity.isHasHeartRate() ? View.VISIBLE : View.GONE);
+        if (activity.isHasHeartRate()) {
+            holder.avgHeart.setText(String.format(Locale.getDefault(), "%d", (int)activity.getAverageHeartrate()));
         }
     }
 

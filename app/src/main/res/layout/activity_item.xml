@@ -44,10 +44,31 @@
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/name"
         android:scaleType="fitCenter" />
+    <LinearLayout
+        android:layout_below="@+id/speed_distance"
+        android:id="@+id/heart_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_segment_heart_active" />
+
+        <TextView
+            android:id="@+id/heart_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
+        android:background="@color/colorKudosCommentBack"
         android:id="@+id/kudos_comment_container"
-        android:layout_below="@+id/speed_distance"
+        android:layout_below="@+id/heart_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -57,16 +78,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/feed_icon_kudos_orange" />
+
             <TextView
                 android:id="@+id/kudos_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,10 +106,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/feed_icon_comments" />
+
             <TextView
                 android:id="@+id/comment_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

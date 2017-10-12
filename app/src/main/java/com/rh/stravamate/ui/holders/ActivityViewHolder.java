@@ -21,6 +21,8 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public View commentView;
     public TextView kudosCount;
     public TextView commentCount;
+    public View heartContainer;
+    public TextView avgHeart;
     public ActivityViewHolder(View itemView) {
         super(itemView);
         date = itemView.findViewById(R.id.date);
@@ -32,5 +34,7 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
         commentView = itemView.findViewById(R.id.comment_container);
         kudosCount = itemView.findViewById(R.id.kudos_count);
         commentCount = itemView.findViewById(R.id.comment_count);
+        heartContainer = itemView.findViewById(R.id.heart_container);
+        avgHeart = itemView.findViewById(R.id.heart_rate);
     }
 }
