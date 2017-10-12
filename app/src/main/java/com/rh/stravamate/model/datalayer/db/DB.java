@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
 import com.rh.stravamate.model.datalayer.primitives.Athlete;
 
 import java.util.List;
@@ -30,7 +31,12 @@ public interface DB {
     @Query("SELECT * FROM activity")
     List<Activity> getActivities();
 
+    @Query("SELECT * FROM activity WHERE type = :type")
+    List<Activity> getActivitiesByType(String type);
 
     @Query("SELECT * FROM activity ORDER by average_speed DESC LIMIT 1")
     List<Activity> getFastestActivity();
+
+    @Query("SELECT type, COUNT(type) FROM activity GROUP BY type")
+    List<ActivityTypeDistinct> getActivityTypes();
 }

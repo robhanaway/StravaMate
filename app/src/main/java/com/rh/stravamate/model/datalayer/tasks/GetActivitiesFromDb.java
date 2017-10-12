@@ -6,6 +6,7 @@ import com.rh.stravamate.model.config.Settings;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
 import com.rh.stravamate.model.datalayer.network.RetroStrava;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
 import com.rh.stravamate.model.util.Logging;
 
 import java.util.List;
@@ -17,14 +18,16 @@ import java.util.List;
  */
 
 public class GetActivitiesFromDb extends GetActivities {
+    final String type;
     public GetActivitiesFromDb(Logging logging, StravaDb stravaDb, RetroStrava retroStrava,
-                               Settings settings, Callback callback) {
+                               Settings settings, String type, Callback callback) {
         super(logging, stravaDb, retroStrava, settings, callback);
+        this.type = type;
     }
 
     @Override
     protected List<Activity> getActivities() {
-        return getActivitiesFromDb();
+        return TextUtils.isEmpty(type) ? getActivitiesFromDb() : stravaDb.getDb().getActivitiesByType(type);
     }
 
     @Override

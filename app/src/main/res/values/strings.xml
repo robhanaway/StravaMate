@@ -6,4 +6,6 @@
     <string name="km">km</string>
     <string name="mile">mi</string>
     <string name="title_activity_stats">StatsActivity</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
 </resources>

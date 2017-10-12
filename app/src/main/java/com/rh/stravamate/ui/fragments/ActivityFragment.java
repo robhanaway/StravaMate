@@ -8,11 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 
 import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.R;
+import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
 import com.rh.stravamate.model.datalayer.tasks.GetActivities;
+import com.rh.stravamate.model.datalayer.tasks.GetActivityTypes;
 import com.rh.stravamate.ui.adapters.ActivityAdapter;
 
 import java.util.List;
@@ -24,7 +29,7 @@ import java.util.List;
  * interface.
  */
 public class ActivityFragment extends BaseFragment {
-
+    ArrayAdapter adapter;
 
     private OnListFragmentInteractionListener mListener;
     RecyclerView listView;
@@ -62,16 +67,17 @@ public class ActivityFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_activities, container, false);
         listView = (RecyclerView) view.findViewById(R.id.activities);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        load();
+        loadTypes();
         return view;
     }
 
 
-    void load() {
-        dataLayer.loadActivities(new GetActivities.Callback() {
+    void loadActivities(String type) {
+        dataLayer.loadActivities(type, new GetActivities.Callback() {
             @Override
             public void onSuccess(List<Activity> activities) {
                 listView.setAdapter(new ActivityAdapter(activities, settings, getActivity()));
+
             }
 
             @Override
@@ -80,6 +86,42 @@ public class ActivityFragment extends BaseFragment {
             }
         });
     }
+
+    void loadTypes() {
+        dataLayer.getActivityTypes(new GetActivityTypes.Callback() {
+            @Override
+            public void onSuccess(List<ActivityTypeDistinct> types) {
+                loadTypeAdapter(types);
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    void loadTypeAdapter(List<ActivityTypeDistinct> types) {
+        adapter = new ArrayAdapter<String>(getMainActivity(), android.R.layout.simple_list_item_1);
+        for (ActivityTypeDistinct activityTypeDistinct : types) {
+            adapter.add(activityTypeDistinct.getType());
+        }
+
+        getMainActivity().getTypeSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                loadActivities(adapter.getItem(i).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        getMainActivity().getTypeSpinner().setAdapter(adapter);
+    }
+
 
     @Override
     public void onAttach(Context context) {

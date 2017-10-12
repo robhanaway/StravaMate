@@ -3,8 +3,10 @@ package com.rh.stravamate.model.datalayer;
 import android.os.AsyncTask;
 
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
 import com.rh.stravamate.model.datalayer.tasks.GetActivities;
 import com.rh.stravamate.model.datalayer.tasks.GetActivitiesFromDb;
+import com.rh.stravamate.model.datalayer.tasks.GetActivityTypes;
 import com.rh.stravamate.model.datalayer.tasks.RefreshActivities;
 import com.rh.stravamate.model.util.Logging;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
@@ -48,10 +50,8 @@ public class DataLayer {
 
     }
 
-
-
-    public void loadActivities(final GetActivities.Callback callback) {
-        new GetActivitiesFromDb(logging, stravaDb, retroStrava, settings, new GetActivities.Callback() {
+    public void loadActivities(String type, final GetActivities.Callback callback) {
+        new GetActivitiesFromDb(logging, stravaDb, retroStrava, settings,type, new GetActivities.Callback() {
             @Override
             public void onSuccess(List<Activity> activities) {
                 if (!activities.isEmpty()) {
@@ -66,5 +66,9 @@ public class DataLayer {
                 callback.onError(e);
             }
         }).execute();
+    }
+
+    public void getActivityTypes(final GetActivityTypes.Callback callback) {
+        new GetActivityTypes(logging, stravaDb, retroStrava, settings, callback).execute();
     }
 }

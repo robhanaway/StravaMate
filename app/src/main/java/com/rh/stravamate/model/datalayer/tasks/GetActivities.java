@@ -13,8 +13,6 @@ import java.util.List;
  */
 
 public abstract class GetActivities extends BaseTask<Void, Void, List<Activity>> {
-
-
     public interface Callback {
         void onSuccess(List<Activity> activities);
         void onError(Exception e);

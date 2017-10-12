@@ -3,12 +3,14 @@ package com.rh.stravamate.ui.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 
 import com.rh.stravamate.StravaMateApplication;
 import com.rh.stravamate.model.config.Settings;
 import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.util.Logging;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
+import com.rh.stravamate.ui.MainActivity;
 
 import javax.inject.Inject;
 
@@ -36,4 +38,12 @@ public abstract class BaseFragment extends Fragment {
     }
 
     abstract String getLogTag();
+
+    protected MainActivity getMainActivity() {
+        return MainActivity.class.cast(getActivity());
+    }
+
+    protected ActionBar getSupportedActionBar() {
+        return getMainActivity().getSupportActionBar();
+    }
 }

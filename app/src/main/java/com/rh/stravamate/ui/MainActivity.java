@@ -8,13 +8,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 
 import com.rh.stravamate.R;
@@ -37,6 +41,10 @@ public class MainActivity extends BaseActivity implements
         AuthFragment.OnFragmentInteractionListener,
         ActivityFragment.OnListFragmentInteractionListener{
 
+    public Spinner getTypeSpinner() {
+        return spinner;
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -47,13 +55,13 @@ public class MainActivity extends BaseActivity implements
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createActionBar();
         logging.d(getTag(), "onCreate");
-
         loadMe();
     }
 
@@ -112,14 +120,20 @@ public class MainActivity extends BaseActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    mDrawerLayout.openDrawer(Gravity.LEFT);
-                } else {
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
-                }
+                toggleDrawer();
                 break;
+
         }
         return true;
+    }
+
+
+    void toggleDrawer() {
+        if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+        } else {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }
     }
 
     @Override
@@ -198,5 +212,14 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onListFragmentInteraction(Activity item) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        MenuItem item = menu.findItem(R.id.spinner);
+        spinner = (Spinner) MenuItemCompat.getActionView(item);
+        return true;
     }
 }
