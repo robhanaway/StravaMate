@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rh.stravamate.ui.StatsActivity">
+    tools:context="com.rh.stravamate.ui.fragments.AuthFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activities"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-
-</LinearLayout>
+</FrameLayout>

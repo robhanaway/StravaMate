@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
-
-import com.rh.stravamate.model.datalayer.DataLayer;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.R;
 import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
@@ -151,6 +148,7 @@ public class ActivityFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        getMainActivity().getTypeSpinner().setOnItemSelectedListener(null);
         mListener = null;
     }
 
