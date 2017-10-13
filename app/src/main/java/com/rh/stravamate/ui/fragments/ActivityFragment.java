@@ -140,7 +140,7 @@ public class ActivityFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        getMainActivity().getTypeSpinner().setOnItemSelectedListener(null);
+//        getMainActivity().getTypeSpinner().setOnItemSelectedListener(null);
         mListener = null;
     }
 

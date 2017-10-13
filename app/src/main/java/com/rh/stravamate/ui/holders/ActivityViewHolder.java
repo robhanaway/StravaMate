@@ -12,6 +12,7 @@ import com.rh.stravamate.R;
  */
 
 public class ActivityViewHolder extends RecyclerView.ViewHolder {
+    public TextView title;
     public TextView date;
     public TextView name;
     public ImageView type;
@@ -26,6 +27,7 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
     public TextView maxHeart;
     public ActivityViewHolder(View itemView) {
         super(itemView);
+        title = itemView.findViewById(R.id.topic);
         date = itemView.findViewById(R.id.date);
         name = itemView.findViewById(R.id.name);
         type = itemView.findViewById(R.id.type);

@@ -2,6 +2,7 @@ package com.rh.stravamate.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,10 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityViewHolder> {
     @Override
     public void onBindViewHolder(ActivityViewHolder holder, int position) {
         Activity activity = activityList.get(position);
+        holder.title.setVisibility(TextUtils.isEmpty(activity.getTitle()) ? View.GONE : View.VISIBLE);
+        if (!TextUtils.isEmpty(activity.getTitle())) {
+            holder.title.setText(activity.getTitle());
+        }
         holder.date.setText(converter.fromDate(activity.getStartDateLocal(), activity.getTimeZone()));
         holder.name.setText(activity.getName());
         holder.speedAndDistance.setText(converter.getSpeed(activity));

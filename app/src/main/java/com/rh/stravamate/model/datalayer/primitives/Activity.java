@@ -2,6 +2,7 @@ package com.rh.stravamate.model.datalayer.primitives;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
@@ -15,6 +16,10 @@ import java.util.Date;
  */
 @Entity(tableName = "activity")
 public class Activity {
+
+    @Ignore
+    private String title;
+
     @SerializedName("id")
     @ColumnInfo(name = "id")
     @PrimaryKey
@@ -344,5 +349,13 @@ public class Activity {
 
     public void setManual(boolean manual) {
         this.manual = manual;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

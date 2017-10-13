@@ -8,6 +8,7 @@ import com.rh.stravamate.model.datalayer.tasks.GetActivities;
 import com.rh.stravamate.model.datalayer.tasks.GetActivitiesFromDb;
 import com.rh.stravamate.model.datalayer.tasks.GetActivityTypes;
 import com.rh.stravamate.model.datalayer.tasks.RefreshActivities;
+import com.rh.stravamate.model.datalayer.tasks.StatsTask;
 import com.rh.stravamate.model.util.Logging;
 import com.rh.stravamate.model.datalayer.db.StravaDb;
 import com.rh.stravamate.model.config.Settings;
@@ -73,4 +74,7 @@ public class DataLayer {
     }
 
 
+    public void getStats(String type, StatsTask.Callback callback) {
+        new StatsTask(logging, stravaDb, retroStrava, settings, type, callback).execute();
+    }
 }
