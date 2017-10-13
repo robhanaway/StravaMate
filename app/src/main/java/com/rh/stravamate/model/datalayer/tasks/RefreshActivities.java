@@ -50,6 +50,7 @@ public class RefreshActivities extends GetActivities {
                 if (result.code() == 200 && !result.body().isEmpty()) {
                     stop = false;
                     stravaDb.getDb().insertActivities(result.body());
+                    logging.d(getTag(), "Inserted page %d", thisPage);
                     thisPage++;
                 } else {
                     stop = true;

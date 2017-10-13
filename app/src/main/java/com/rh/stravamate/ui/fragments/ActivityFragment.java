@@ -91,7 +91,21 @@ public class ActivityFragment extends BaseFragment {
         dataLayer.getActivityTypes(new GetActivityTypes.Callback() {
             @Override
             public void onSuccess(List<ActivityTypeDistinct> types) {
-                loadTypeAdapter(types);
+                if (types.isEmpty()) {
+                    dataLayer.loadActivities(null, new GetActivities.Callback() {
+                        @Override
+                        public void onSuccess(List<Activity> activities) {
+                            loadTypes();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+                } else {
+                    loadTypeAdapter(types);
+                }
             }
 
             @Override
