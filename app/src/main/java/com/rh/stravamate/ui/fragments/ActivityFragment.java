@@ -107,7 +107,6 @@ public class ActivityFragment extends BaseFragment {
 
             @Override
             public void onError(Exception e) {
-
             }
         });
     }
@@ -117,7 +116,13 @@ public class ActivityFragment extends BaseFragment {
         for (ActivityTypeDistinct activityTypeDistinct : types) {
             adapter.add(activityTypeDistinct.getType());
         }
+        getMainActivity().getTypeSpinner().setAdapter(adapter);
+    }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         getMainActivity().getTypeSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -130,19 +135,6 @@ public class ActivityFragment extends BaseFragment {
             }
         });
 
-        getMainActivity().getTypeSpinner().setAdapter(adapter);
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
 
     @Override

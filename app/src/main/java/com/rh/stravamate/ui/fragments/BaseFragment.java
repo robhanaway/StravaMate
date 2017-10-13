@@ -3,6 +3,7 @@ package com.rh.stravamate.ui.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 
 import com.rh.stravamate.StravaMateApplication;
@@ -31,6 +32,7 @@ public abstract class BaseFragment extends Fragment {
     @Inject
     Settings settings;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,4 +48,6 @@ public abstract class BaseFragment extends Fragment {
     protected ActionBar getSupportedActionBar() {
         return getMainActivity().getSupportActionBar();
     }
+
+
 }

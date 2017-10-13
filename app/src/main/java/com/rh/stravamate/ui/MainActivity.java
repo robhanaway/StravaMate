@@ -104,11 +104,20 @@ public class MainActivity extends BaseActivity implements
 
     void selectItem(int position) {
         switch (position) {
+            case 0:
+                showActivities();
+                break;
             case 1:
                 showStats();
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    void showActivities() {
+        Fragment fragment = ActivityFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment).commit();
     }
 
     void showStats() {

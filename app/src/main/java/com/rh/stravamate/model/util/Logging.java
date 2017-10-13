@@ -13,11 +13,14 @@ public class Logging {
 
     @Inject
     public Logging() {
-
     }
 
     public void d(String tag, String format, Object... args) {
         Log.d(tag, getFormattedString(format, args));
+    }
+
+    public void e(String tag, String text, Throwable throwable) {
+        Log.e(tag, text, throwable);
     }
 
     String getFormattedString(String format, Object... args) {

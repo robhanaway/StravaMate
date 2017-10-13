@@ -71,4 +71,6 @@ public class DataLayer {
     public void getActivityTypes(final GetActivityTypes.Callback callback) {
         new GetActivityTypes(logging, stravaDb, retroStrava, settings, callback).execute();
     }
+
+
 }
