@@ -142,6 +142,38 @@ public class Activity {
     @Expose
     private boolean manual;
 
+    public Activity() {
+        //Required empty ctor
+    }
+
+    public Activity(Activity activity) {
+        this.title = activity.title;
+        this.id = activity.id;
+        this.name = activity.name;
+        this.startDateLocal = activity.startDateLocal;
+        this.description = activity.description;
+        this.distance = activity.distance;
+        this.movingTime = activity.movingTime;
+        this.elapsedTime = activity.elapsedTime;
+        this.totalElevationGain = activity.totalElevationGain;
+        this.elevationHigh = activity.elevationHigh;
+        this.elevationLow = activity.elevationLow;
+        this.type = activity.type;
+        this.averageSpeed = activity.averageSpeed;
+        this.maxSpeed = activity.maxSpeed;
+        this.timeZone = activity.timeZone;
+        this.averageHeartrate = activity.averageHeartrate;
+        this.maxHeartRate = activity.maxHeartRate;
+        this.achievementCount = activity.achievementCount;
+        this.prCount = activity.prCount;
+        this.kudosCount = activity.kudosCount;
+        this.commentCount = activity.commentCount;
+        this.photoCount = activity.photoCount;
+        this.totalPhotoCount = activity.totalPhotoCount;
+        this.manual = activity.manual;
+    }
+
+
     public String getId() {
         return id;
     }

@@ -2,6 +2,7 @@ package com.rh.stravamate.model.datalayer.network;
 
 
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.RetrofitActivity;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ import retrofit2.http.Query;
 
 public interface ActivityService {
     @GET("/api/v3/athlete/activities")
-    Call<List<Activity>> get(@Header("Authorization") String auth, @Query("page") int page);
+    Call<List<RetrofitActivity>> get(@Header("Authorization") String auth, @Query("page") int page);
 }

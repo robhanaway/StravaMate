@@ -5,9 +5,11 @@ import com.rh.stravamate.model.datalayer.db.StravaDb;
 import com.rh.stravamate.model.datalayer.network.ActivityService;
 import com.rh.stravamate.model.datalayer.network.RetroStrava;
 import com.rh.stravamate.model.datalayer.primitives.Activity;
+import com.rh.stravamate.model.datalayer.primitives.RetrofitActivity;
 import com.rh.stravamate.model.util.Logging;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,12 +48,16 @@ public class RefreshActivities extends GetActivities {
         while (!stop) {
 
             try {
-                Call<List<Activity>> response = activityService.get("Bearer " + settings.getToken(), thisPage);
-                Response<List<Activity>> result = response.execute();
+                Call<List<RetrofitActivity>> response = activityService.get("Bearer " + settings.getToken(), thisPage);
+                Response<List<RetrofitActivity>> result = response.execute();
                 if (result.code() == 200 && !result.body().isEmpty()) {
                     stop = false;
-                    List<Activity> activities = result.body();
-                    stravaDb.getDb().insertActivities(activities);
+                    List<RetrofitActivity> activities = result.body();
+                    ArrayList<Activity> dbActivities = new ArrayList<>();
+                    for (RetrofitActivity retrofitActivity : activities) {
+                        dbActivities.add(new Activity(retrofitActivity));
+                    }
+                    stravaDb.getDb().insertActivities(dbActivities);
                     inserted += activities.size();
                     callback.onProgress(inserted);
                     logging.d(getTag(), "Inserted page %d", thisPage);

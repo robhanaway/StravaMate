@@ -191,6 +191,7 @@ public class ActivityFragment extends BaseFragment {
     }
 
     void refresh() {
+        setProgressText(getString(R.string.loading));
         dataLayer.refreshActivities(new GetActivities.Callback() {
             @Override
             public void onSuccess(List<Activity> activities) {
@@ -220,10 +221,13 @@ public class ActivityFragment extends BaseFragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                frame.setVisibility(View.VISIBLE);
-                progress.setText(String.format(Locale.getDefault(), "Loaded : %d", count));
+                setProgressText(String.format(Locale.getDefault(), "Loaded : %d", count));
             }
         });
+    }
 
+    void setProgressText(String text) {
+        frame.setVisibility(View.VISIBLE);
+        progress.setText(text);
     }
 }
