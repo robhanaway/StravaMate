@@ -42,7 +42,6 @@ public class StatsFragment extends BaseFragment {
      *
      * @return A new instance of fragment StatsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static StatsFragment newInstance() {
         StatsFragment fragment = new StatsFragment();
 

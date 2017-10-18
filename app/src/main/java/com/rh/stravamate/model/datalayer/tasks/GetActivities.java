@@ -16,6 +16,7 @@ public abstract class GetActivities extends BaseTask<Void, Void, List<Activity>>
     public interface Callback {
         void onSuccess(List<Activity> activities);
         void onError(Exception e);
+        void onProgress(int done);
     }
 
     final Callback callback;

@@ -18,6 +18,7 @@ import retrofit2.Response;
  */
 
 public class RefreshActivities extends GetActivities {
+    int inserted;
     public RefreshActivities(Logging logging, StravaDb stravaDb, RetroStrava retroStrava, Settings settings, Callback callback) {
         super(logging, stravaDb, retroStrava, settings, callback);
     }
@@ -49,7 +50,10 @@ public class RefreshActivities extends GetActivities {
                 Response<List<Activity>> result = response.execute();
                 if (result.code() == 200 && !result.body().isEmpty()) {
                     stop = false;
-                    stravaDb.getDb().insertActivities(result.body());
+                    List<Activity> activities = result.body();
+                    stravaDb.getDb().insertActivities(activities);
+                    inserted += activities.size();
+                    callback.onProgress(inserted);
                     logging.d(getTag(), "Inserted page %d", thisPage);
                     thisPage++;
                 } else {

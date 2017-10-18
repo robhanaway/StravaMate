@@ -1,12 +1,42 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/swipeContainer"
     android:layout_height="match_parent"
     tools:context="com.rh.stravamate.ui.fragments.AuthFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activities"
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/progress_frame"
+            android:background="@color/colorPartialBlack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:foregroundGravity="center_vertical"
+                android:textColor="@color/colorSlidingMenu"
+                android:textSize="@dimen/activity_title_text"
+                android:textAlignment="center"
+                />
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </FrameLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

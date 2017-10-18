@@ -66,6 +66,11 @@ public class DataLayer {
             public void onError(Exception e) {
                 callback.onError(e);
             }
+
+            @Override
+            public void onProgress(int done) {
+
+            }
         }).execute();
     }
 
@@ -76,5 +81,9 @@ public class DataLayer {
 
     public void getStats(String type, StatsTask.Callback callback) {
         new StatsTask(logging, stravaDb, retroStrava, settings, type, callback).execute();
+    }
+
+    public void refreshActivities(RefreshActivities.Callback callback) {
+        new RefreshActivities(logging, stravaDb, retroStrava, settings, callback ).execute();
     }
 }

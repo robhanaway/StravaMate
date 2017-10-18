@@ -3,6 +3,7 @@ package com.rh.stravamate.ui.fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
 import com.rh.stravamate.model.datalayer.primitives.Activity;
 import com.rh.stravamate.R;
 import com.rh.stravamate.model.datalayer.primitives.ActivityTypeDistinct;
@@ -18,6 +21,7 @@ import com.rh.stravamate.model.datalayer.tasks.GetActivityTypes;
 import com.rh.stravamate.ui.adapters.ActivityAdapter;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A fragment representing a list of Items.
@@ -30,6 +34,9 @@ public class ActivityFragment extends BaseFragment {
 
     private OnListFragmentInteractionListener mListener;
     RecyclerView listView;
+    private SwipeRefreshLayout swipeContainer;
+    TextView progress;
+    View frame;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -63,7 +70,10 @@ public class ActivityFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activities, container, false);
         listView = (RecyclerView) view.findViewById(R.id.activities);
+        progress = view.findViewById(R.id.progress);
+        frame = view.findViewById(R.id.progress_frame);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        setupSwipe(view);
         loadTypes();
         return view;
     }
@@ -79,6 +89,11 @@ public class ActivityFragment extends BaseFragment {
 
             @Override
             public void onError(Exception e) {
+
+            }
+
+            @Override
+            public void onProgress(int done) {
 
             }
         });
@@ -97,6 +112,11 @@ public class ActivityFragment extends BaseFragment {
 
                         @Override
                         public void onError(Exception e) {
+
+                        }
+
+                        @Override
+                        public void onProgress(int done) {
 
                         }
                     });
@@ -157,5 +177,53 @@ public class ActivityFragment extends BaseFragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Activity item);
+    }
+
+    private void setupSwipe(View view) {
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
+    }
+
+    void refresh() {
+        dataLayer.refreshActivities(new GetActivities.Callback() {
+            @Override
+            public void onSuccess(List<Activity> activities) {
+                refreshComplete();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                logging.e(getTag(), "refresh()", e);
+                refreshComplete();
+
+            }
+
+            @Override
+            public void onProgress(int done) {
+                setProgress(done);
+            }
+        });
+    }
+
+    void refreshComplete() {
+        swipeContainer.setRefreshing(false);
+        frame.setVisibility(View.GONE);
+    }
+
+    void setProgress(final int count) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                frame.setVisibility(View.VISIBLE);
+                progress.setText(String.format(Locale.getDefault(), "Loaded : %d", count));
+            }
+        });
+
     }
 }
